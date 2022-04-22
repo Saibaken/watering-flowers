@@ -15,7 +15,6 @@ app.get('/getData', (request, response) => {
 
 app.post('/updateData', (request, response) => {
     updateFlower(request.body);
-    console.log(request.body);
     response.sendStatus(200);
 });
 
