@@ -8,12 +8,13 @@ export const fetchData = async () => {
   return response;
 };
 
-export const sendData = (data) => {
-  fetch("http://localhost:3001/updateData", {
+export const sendData = async (data) => {
+  const response = await fetch("http://localhost:3001/updateData", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   });
+  return response;
 }
