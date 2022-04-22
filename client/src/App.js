@@ -1,12 +1,11 @@
-import "./App.css";
 import { useState, useEffect } from "react";
-import { fetchData } from "./dataReceiver";
+import { fetchData, sendData } from "./dataReceiver";
 
 function App() {
   const [flowers, setFlowers] = useState([]);
 
   useEffect(() => {
-    setFlowers(fetchData())
+    fetchData().then(response => setFlowers(response));
   }, []);
 
   const water = (id) => {
@@ -14,6 +13,8 @@ function App() {
     const index = tempFlowers.findIndex((element) => element.id === id);
     tempFlowers[index].lastDate = new Date();
     setFlowers(tempFlowers);
+    sendData(tempFlowers);
+    fetchData().then(response => setFlowers(response));
   };
 
   return (

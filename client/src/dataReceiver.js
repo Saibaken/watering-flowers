@@ -1,16 +1,19 @@
-import { v4 as uuidv4 } from "uuid";
-
-export const fetchData = () => {
-  return [
-    {
-      name: "ABC",
-      id: uuidv4(),
-      lastDate: new Date(2020, 12, 12, 14, 55, 32),
-    },
-    {
-      name: "DEF",
-      id: uuidv4(),
-      lastDate: new Date(2021, 9, 10, 12, 0, 0),
-    },
-  ];
+export const fetchData = async () => {
+  const response = await fetch("http://localhost:3001/getData").then((response) =>
+    response.json()
+  );
+  response.forEach(flower => {
+    flower.lastDate = new Date(flower.lastDate);
+  });
+  return response;
 };
+
+export const sendData = (data) => {
+  fetch("http://localhost:3001/updateData", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+}
