@@ -1,43 +1,44 @@
 import { useState, useEffect } from "react";
 import { fetchData, sendData } from "./dataReceiver";
+//import './app.css';
 
 function App() {
-  const [flowers, setFlowers] = useState([]);
+  const [plants, setPlants] = useState([]);
   const [previous, setPrevious] = useState([]);
 
   useEffect(() => {
     fetchData().then((response) => {
-      setFlowers(response);
+      setPlants(response);
       setPrevious(structuredClone(response));
     });
   }, []);
 
   const water = (id) => {
-    const tempFlowers = [...flowers];
-    const index = tempFlowers.findIndex((element) => element.id === id);
-    tempFlowers[index].lastDate = new Date();
-    setFlowers(tempFlowers);
-    sendData(tempFlowers);
+    const tempPlants = [...plants];
+    const index = tempPlants.findIndex((element) => element.id === id);
+    tempPlants[index].lastDate = new Date();
+    setPlants(tempPlants);
+    sendData(tempPlants);
   };
 
   const undoWater = (id) => {
-    const tempFlowers = [...flowers];
-    const index = tempFlowers.findIndex((element) => element.id === id);
+    const tampPlants = [...plants];
+    const index = tampPlants.findIndex((element) => element.id === id);
     const prevIndex = previous.findIndex((element) => element.id === id);
-    tempFlowers[index].lastDate = previous[prevIndex].lastDate;
-    setFlowers(tempFlowers);
-    sendData(tempFlowers);
+    tampPlants[index].lastDate = previous[prevIndex].lastDate;
+    setPlants(tampPlants);
+    sendData(tampPlants);
   };
 
   return (
-    <div>
+    <div className="mainList">
       <ul>
-        {flowers.map((flower) => (
-          <li key={flower.id}>
-            <span>{flower.name}</span>
-            <span>{flower.lastDate.toString()}</span>
-            <button onClick={() => water(flower.id)}>💦</button>
-            <button onClick={() => undoWater(flower.id)}>🔙</button>
+        {plants.map((plant) => (
+          <li key={plant.id}>
+            <span>{plant.name}</span>
+            <span>{plant.lastDate.toString()}</span>
+            <button onClick={() => water(plant.id)}>💦</button>
+            <button onClick={() => undoWater(plant.id)}>🔙</button>
           </li>
         ))}
       </ul>

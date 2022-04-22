@@ -3,7 +3,7 @@ const cors = require('cors');
 const app = express();
 const port = 3001;
 
-const {getData, updateFlower} = require('./filemanagement')
+const {getData, updateData} = require('./filemanagement')
 
 
 app.use(express.json());
@@ -14,7 +14,7 @@ app.get('/getData', (request, response) => {
 })
 
 app.post('/updateData', (request, response) => {
-    updateFlower(request.body);
+    updateData(request.body);
     response.sendStatus(200);
 });
 
