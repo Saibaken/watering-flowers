@@ -1,19 +1,22 @@
-const express = require("express");
+const express = require('express');
+const cors = require('cors');
 const app = express();
 const port = 3001;
 
-const {getData, updateFlower} = require("./filemanagement")
+const {getData, updateFlower} = require('./filemanagement')
 
 
 app.use(express.json());
+app.use(cors());
 
 app.get('/getData', (request, response) => {
     response.send(getData());
 })
 
 app.post('/updateData', (request, response) => {
-    updateFlower(req.body.id);
+    updateFlower(request.body);
+    console.log(request.body);
     response.sendStatus(200);
-})
+});
 
 app.listen(port);
