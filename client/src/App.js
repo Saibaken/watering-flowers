@@ -30,18 +30,34 @@ function App() {
     sendData(tampPlants);
   };
 
+  const formatDate = (date) => {
+    return date.getDate() + "." + date.getMonth() + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes();
+  }
+
   return (
-    <div className="mainList">
-      <ul>
-        {plants.map((plant) => (
-          <li key={plant.id}>
-            <span>{plant.name}</span>
-            <span>{plant.lastDate.toString()}</span>
-            <button onClick={() => water(plant.id)}>💦</button>
-            <button onClick={() => undoWater(plant.id)}>🔙</button>
-          </li>
-        ))}
-      </ul>
+    <div className="container">
+      <div className="plantList">
+        <ul>
+          {plants.map((plant) => (
+            <li className="plantList__listItem" key={plant.id}>
+              <span>{plant.name}</span>
+              <span>{formatDate(plant.lastDate)}</span>
+              <button
+                className="plantList__waterButton"
+                onClick={() => water(plant.id)}
+              >
+                💦
+              </button>
+              <button
+                className="plantList__revertButton"
+                onClick={() => undoWater(plant.id)}
+              >
+                🔙
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
