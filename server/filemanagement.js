@@ -1,9 +1,9 @@
 const fs = require("fs");
 
 module.exports.getData = () => {
-  return JSON.parse(fs.readFileSync("flowers.json")) ?? [];
+  return JSON.parse(fs.readFileSync("plants.json")) ?? [];
 };
 
 module.exports.updateData = (data) => {
-  fs.writeFileSync("flowers.json", JSON.stringify(data));
+  fs.writeFileSync("plants.json", JSON.stringify(data));
 };
