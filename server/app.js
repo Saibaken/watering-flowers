@@ -18,4 +18,6 @@ app.post('/updateData', (request, response) => {
     response.sendStatus(200);
 });
 
-app.listen(port);
+app.listen(port, () => {
+    console.log(`App listening on port ${port}`);
+});
